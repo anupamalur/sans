@@ -1,5 +1,6 @@
 <html>
 <?php
+	session_start();
 	if( $_GET["username"] && $_GET["password"] )
    {
       
@@ -14,13 +15,36 @@
 		die('Could not select database.');
 	}
 	
+	$uname = $_GET["username"];
 	$sql = 'SELECT * FROM user';
+	$sql2 = "SELECT userId FROM user WHERE username='$uname'";
     $retval = mysql_query( $sql, $link );
+
+	$retval2 = mysql_query( $sql2, $link );
+      
+      if(!$retval2)
+      {
+        echo mysql_error($link);
+        die('Cannot obtain User ID');     
+      }
+
+ 	$uid = "";
+ 	while($row = mysql_fetch_array($retval2, MYSQL_ASSOC))
+        {
+             $uid =  $row['userId'];
+             break;
+        }
+
+
     while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
    {
    		if (strcmp($row["username"] ,$_GET["username"]) ==0)
    			{
-   				if (strcasecmp($_GET["password"], $row["passwd"]) == 0) {?>
+   				if (strcasecmp($_GET["password"], $row["passwd"]) == 0) {
+
+   					$_SESSION["uid"] = $uid;
+
+   					?>
    					<meta http-equiv="refresh" content="0;URL= ./html5up-lens/index.php">
    					You are being automatically redirected to a new location.<br />
     				If your browser does not redirect you in few seconds, or you do

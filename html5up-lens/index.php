@@ -3,6 +3,8 @@
 <html>
 <?php
   session_start();
+  $uid=$_SESSION["uid"];
+  echo $uid;
    $link = mysql_connect('sans-dbinstance.catjk6wybrmd.us-west-2.rds.amazonaws.com:3306', 'sans', 'sans12345');
 	if (!$link) {
 	    die('Could not connect: ' . mysql_error());
@@ -13,22 +15,27 @@
 	{
 		die('Could not select database.');
 	}
+	$sql2 = "SELECT M.movieId,M.title,M.photoURL,M.runtime FROM user_predictions as U INNER JOIN movies_table as M ON U.mid = M.movieId WHERE U.uid= ".$uid;
+	$retval2 = mysql_query( $sql2, $link );
+      
 	?>
+
 	<head>
 		<title>MOVIE MANIA</title>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
+		<link rel="stylesheet" href="assets/css/mycss.css" />
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
 	</head>
 	<body class="is-loading-0 is-loading-1 is-loading-2">
 
+
 		<!-- Main -->
 			<div id="main">
-
 				<!-- Header -->
 					<header id="header">
 						<h1>MOVIE MANIA</h1>
@@ -39,15 +46,38 @@
 							<li><a href="https://www.facebook.com/sneha.rajana?fref=ts" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 							<li><a href="https://www.facebook.com/nishant.bindu?fref=ts" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 						</ul>
-					</header>
-
-				<!-- Thumbnail -->
+					</header> 
 					<section id="thumbnails">
+					
+					<?php
+
+					    $movieid ="";
+					    $title ="";
+					    $photoURL ="";
+					    $runtime ="";
+						
+						echo $retval2;
+						while($row = mysql_fetch_array($retval2, MYSQL_ASSOC))
+					        {
+					             $movieid =  $row['movieId'];
+					             $title =  $row['title'];
+					             $photoURL =  $row['photoURL'];
+					             $runtime =  $row['runtime'];
+							?>             
+
 						<article>
-							<a class="thumbnail" href="images/fulls/01.jpg" data-position="left center"><img src="images/thumbs/01.jpg" alt="" /></a>
-							<h2>Diam tempus accumsan</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-						</article>
+							<a class="thumbnail" href= <?php print $photoURL; ?>><img src=<?php print $photoURL; ?> alt="" /></a>
+							<h2 text-align: center> <?php print $title; ?> </h2>
+							<p> RUNTIME = <?php print $runtime; ?> minutes</p>
+						</article> <?php
+							}
+					?>
+					<!-- Thumbnail -->
+
+						<!---
+
+					        }
+				
 						<article>
 							<a class="thumbnail" href="images/fulls/02.jpg"><img src="images/thumbs/02.jpg" alt="" /></a>
 							<h2>Vivamus convallis libero</h2>
@@ -104,7 +134,7 @@
 							<p>Feugiat auctor leo massa, nec vestibulum nisl erat faucibus, rutrum nulla.</p>
 						</article>
 					</section>
-
+					-->
 				<!-- Footer -->
 					<footer id="footer">
 						<ul class="copyright">
