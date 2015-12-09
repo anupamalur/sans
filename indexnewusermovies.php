@@ -113,7 +113,7 @@
     {
         die('Could not select database.');
     }
-    $sql = "SELECT movieId, title FROM movies_table LIMIT 10";
+    $sql = "SELECT movieId, title FROM movies_table ORDER BY rating LIMIT 10";
     $retval = mysql_query( $sql, $link );
       if(!$retval)
       {

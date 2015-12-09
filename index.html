@@ -47,7 +47,7 @@
                         </div>
 
                         <div id="register" class="animate form">
-                            <form  action="mysuperscript_register.php" autocomplete="on" method="GET"> 
+                            <form  action="mysuperscript_register.php" autocomplete="on" method="GET" onSubmit="return validate()"> 
                                 <h1> Sign up </h1> 
                                 <p> 
                                     <label for="usernamesignup" class="uname" data-icon="u">Your Username</label>
@@ -71,6 +71,24 @@
                                 </p>
                                 <p class="signin button"> 
 									<input type="submit" value="Sign up"/> 
+								
+									<script>
+									function validate()
+										{
+										     var new_password = document.getElementById("passwordsignup").value;
+										     var confirm_new_password = document.getElementById("passwordsignup_confirm").value;
+
+										     if ( new_password != confirm_new_password)
+										     {
+										         alert("Passwords do not match.");
+										         return false;
+										     }
+										     else
+										     {
+										          return true;
+										     }
+										 }
+									</script>	
 								</p>
                                 <p class="change_link">  
 									Already a member ?
