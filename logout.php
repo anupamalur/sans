@@ -1,4 +1,7 @@
-<!DOCTYPE html>
+<?php
+session_start();
+?>
+<html>
     <head>
         <meta charset="UTF-8" />
         <title>MOVIE MANIA - LOG IN</title>
@@ -25,14 +28,14 @@
                             <form  action="mysuperscript.php" autocomplete="on" method="GET"> 
                                 <h1>Log in</h1> 
                                 <p> 
-                                    <label for="username" class="uname" data-icon="u" > Your username </label>
-                                    <input id="username" name="username" required="required" type="text" placeholder="anupamalur"/>
+                                    <label for="username" class="uname" data-icon="u" > Your email or username </label>
+                                    <input id="username" name="username" required="required" type="text" placeholder="anupamalur@gmail.com"/>
                                 </p>
                                 <p> 
                                     <label for="password" class="youpasswd" data-icon="p"> Your password </label>
                                     <input id="password" name="password" required="required" type="password" placeholder="eg. moviemania123" /> 
                                 </p>
-                                <p>
+                               <p>
                                     <a href="./html5up-lens/fbconfig.php" color:"black">Login with Facebook</a>
                                 </p>
                                 <p class="login button"> 
@@ -42,7 +45,6 @@
 									Not a member yet ?
 									<a href="#toregister" class="to_register">Join us</a>
 								</p>
-                                
                             </form>
                         </div>
 
@@ -69,7 +71,6 @@
                                     <label for="passwordsignup_confirm" class="youpasswd" data-icon="p">Please confirm your password </label>
                                     <input id="passwordsignup_confirm" name="passwordsignup_confirm" required="required" type="password" placeholder="eg. moviemania123"/>
                                 </p>
-
                                 <p class="signin button"> 
 									<input type="submit" value="Sign up"/> 
 								
@@ -103,4 +104,7 @@
             </section>
         </div>
     </body>
+<?php
+session_destroy();
+?>
 </html>

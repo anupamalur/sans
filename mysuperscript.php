@@ -35,7 +35,7 @@
              break;
         }
 
-
+        $i = 0;
     while($row = mysql_fetch_array($retval, MYSQL_ASSOC))
    {
    		if (strcmp($row["username"] ,$_GET["username"]) ==0)
@@ -43,6 +43,7 @@
    				if (strcasecmp($_GET["password"], $row["passwd"]) == 0) {
 
    					$_SESSION["uid"] = $uid;
+            $i = 1;
 
    					?>
    					<meta http-equiv="refresh" content="0;URL= ./html5up-lens/index.php">
@@ -62,15 +63,14 @@
    					break;
    				}
    			}
-   			else
-   			{
-   				echo "Wrong Login Credentials";	?>
-   				<html>
-   				<meta http-equiv="refresh" content="0;URL= wrong_index.html">
-   				</html> <?php
-   				break;	
-   			}
-   		
+   }
+   if($i == 0)
+   {
+            echo "Wrong Login Credentials";  ?>
+            <html>
+            <meta http-equiv="refresh" content="0;URL= wrong_index.html">
+            </html> <?php
+    
    }
 	mysql_close($link);
    }

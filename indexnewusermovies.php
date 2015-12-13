@@ -12,7 +12,7 @@
         <link rel="stylesheet" type="text/css" href="css-num/demo.css" />
         <link rel="stylesheet" type="text/css" href="css-num/style.css" />
 		<link rel="stylesheet" type="text/css" href="css-num/animate-custom.css" />
-		<link rel="stylesheet" type="text/css" href="css-num/button.css" />
+		
 		<style type="text/css">
 		div.box {
 			background-color: lightgrey;
@@ -94,13 +94,33 @@
       		{
         		echo mysql_error($link);
         		die('Error inserting into user_predictions table');     
-      		}	?>
-			<meta http-equiv="refresh" content="0;URL= ./html5up-lens/index.php">
+      		}	
+			
+        }
+		/*$sqln = "Select movieId from movies_table where genre in (Select distinct genre from user_movies join movies_table on user_movies.mid = movies_table.movieId where uid =".$uid.")";
+		$retvaln = mysql_query($sqln, $link);
+		if(!$retvaln)
+      		{
+        		echo mysql_error($link);
+        		die('Error fetching prediction');     
+      		}
+		while($row = mysql_fetch_array($retvaln, MYSQL_ASSOC))
+        { 
+			$movieid =  $row['movieId'];
+            $sql3n = "INSERT INTO user_predictions VALUES(".$uid.",".$movieid.")";
+			$retval3n = mysql_query( $sql3, $link );
+      		if(!$retval3n)
+      		{
+        		echo mysql_error($link);
+        		die('Error inserting into user_predictions table');     
+      		}	
+        }*/
+        ?>
+			<meta http-equiv="refresh" content="0;URL=./html5up-lens/index.php">
    					You are being automatically redirected to a new location.<br />
     				If your browser does not redirect you in few seconds, or you do
-    				not wish to wait, <a href="index.html">CLICK HERE !!!</a>. 
+    				not wish to wait, <a href="index.html">CLICK HERE !!!</a>
 			<?php
-        }
 
     }
     $link = mysql_connect('sans-dbinstance.catjk6wybrmd.us-west-2.rds.amazonaws.com:3306', 'sans', 'sans12345');

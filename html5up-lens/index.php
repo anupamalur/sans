@@ -3,8 +3,30 @@
 <html>
 <?php
   session_start();
-  $uid=$_SESSION["uid"];
-  
+
+  if ($_SESSION['FBID'])
+  {
+  		$fbfullname = $_SESSION['FULLNAME'];
+  		$link123 = mysql_connect('sans-dbinstance.catjk6wybrmd.us-west-2.rds.amazonaws.com:3306', 'sans', 'sans12345');
+        $db123 = mysql_select_db('sans_schema', $link123); 
+        $sql123 = "SELECT userId FROM user WHERE fullname='$fbfullname'";
+    	$retval123 = mysql_query( $sql123, $link123 );
+    	if(!$retval123)
+	      {
+	        echo mysql_error($link123);
+	        die('Cannot obtain User ID');     
+	      }
+    	while($row123 = mysql_fetch_array($retval123, MYSQL_ASSOC))
+        {
+             $uid =  $row123['userId'];
+             break;
+        }
+  }
+  else
+  {
+  $uid=$_SESSION['uid'];
+  echo $uid;
+  }
    $link = mysql_connect('sans-dbinstance.catjk6wybrmd.us-west-2.rds.amazonaws.com:3306', 'sans', 'sans12345');
 	if (!$link) {
 	    die('Could not connect: ' . mysql_error());
@@ -24,7 +46,7 @@
 	?>
 
 	<head>
-		<script type="text/javascript">
+		<!--<script type="text/javascript">
 		function getmovieid(ele){
 		var movid = ele.id;
 		var useridhere = <?php print $uid ?>;
@@ -35,7 +57,7 @@
 		rs.Open("Insert into user_movies values (" + useridhere + "," + movieid + ")", connection);
 		rs.close;
 		connection.close;	
-		}
+		} -->
 		</script>		
 		<title>MOVIE MANIA</title>
 		<meta charset="utf-8" />
@@ -43,6 +65,7 @@
 		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
 		<link rel="stylesheet" href="assets/css/main.css" />
 		<link rel="stylesheet" href="assets/css/mycss.css" />
+		<link href='https://fonts.googleapis.com/css?family=Indie+Flower' rel='stylesheet' type='text/css'>
 		<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
 		<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
 		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
@@ -54,8 +77,23 @@
 			<div id="main">
 				<!-- Header -->
 					<header id="header">
+						<p style="text-align:right; font-size: 1.0em;"><a href="../logout.php">Logout</a></p>
 						<h1>MOVIE MANIA</h1>
-						<p>The best place to find movies!</p>
+						<h3>The best place to find movies!</h3>
+						<div style="padding:4px;width:20em;">
+							<table border="0" align="center" cellpadding="0">
+							<tr><td>
+							<input type="text" id ="#abc" name="q" size="25"
+							maxlength="255" value="" />
+									
+							<input type="submit" id = "anupam" value="Bing Search" /></td></tr>
+							
+							</table>
+						</div>
+
+						</form>
+						<form method="get" action="http://www.bing.com/search">	
+
 						<ul class="icons">
 							<li><a href="https://www.facebook.com/anupam.alur?fref=ts" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
 							<li><a href="https://www.facebook.com/sajalc14?fref=ts" class="icon fa-facebook"><span class="label">Facebook</span></a></li>
@@ -77,14 +115,16 @@
 					             $title =  $row['title'];
 					             $photoURL =  $row['photoURL'];
 					             $runtime =  $row['runtime'];
-							?>             
+					             
+							?>            
 						<article>
-							<a class="thumbnail" href= <?php print $photoURL; ?>><img src=<?php print $photoURL; ?> alt="" /></a>
+							<a class="thumbnail"  href= <?php print $photoURL; ?>><img src=<?php print $photoURL; ?> alt="" /></a>
 							<h2 text-align: center> <?php print $title; ?> </h2>
 							<h3> RUNTIME = <?php print $runtime; ?> minutes</h3>
-							<p> <a href = "#" onclick = "getmovieid (this);" id = "<?php print $movieid ?>"> I have already seen this movie </a></p>
-							
-						</article> <?php
+							<p> <a href = "index2.php?moid=<?php print $movieid; ?>" > I have already seen this movie </a></p>
+
+						</article>
+						<?php
 							}
 					?>
 							

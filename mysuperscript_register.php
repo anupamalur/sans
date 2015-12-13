@@ -17,6 +17,7 @@
 	
 	$uname = $_GET["usernamesignup"];
   $fname = $_GET["fullnamesignup"];
+  
   $dob = $_GET["dobsignup"];
   $pwd = $_GET["passwordsignup_confirm"];
   $sql = "INSERT INTO user ". "(username,fullname, dob, passwd) ". "VALUES('$uname','$fname','$dob', '$pwd')";
@@ -48,7 +49,7 @@
         <meta http-equiv="refresh" content="0;URL= indexnewusermovies.php">
             You are being automatically redirected to a new location.<br />
             If your browser does not redirect you in few seconds, or you do
-            not wish to wait, <a href="./html5up-lens/index.html">CLICK HERE !!!</a>. 
+            not wish to wait, <a href="indexnewusermovies.php">CLICK HERE !!!</a>. 
 
             <?php
   

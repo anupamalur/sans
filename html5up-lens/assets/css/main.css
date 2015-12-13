@@ -131,6 +131,8 @@
 		transition: color 0.25s ease, border-bottom-color 0.25s ease;
 		border-bottom: dotted 1px;
 		color: inherit;
+		font-family: 'Indie Flower', cursive;
+		font-size: 1.65.0em;
 		text-decoration: none;
 	}
 
@@ -150,6 +152,7 @@
 
 	p {
 		margin: 0 0 1.25em 0;
+		font-family: 'Indie Flower', cursive;
 	}
 
 	h1, h2, h3, h4, h5, h6 {
@@ -166,22 +169,27 @@
 
 	h2 {
 		font-size: 1.25em;
+		font-family: 'Indie Flower', cursive;
 	}
 
 	h3 {
-		font-size: 1em;
+		font-size: 1.25em;
+		font-family: 'Indie Flower', cursive;
 	}
 
 	h4 {
 		font-size: 0.9em;
+		font-family: 'Indie Flower', cursive;
 	}
 
 	h5 {
 		font-size: 0.8em;
+		font-family: 'Indie Flower', cursive;
 	}
 
 	h6 {
 		font-size: 0.7em;
+		font-family: 'Indie Flower', cursive;
 	}
 
 	sub {
@@ -815,8 +823,9 @@
 	}
 
 		#header h1 {
-			font-size: 2.25em;
+			font-size: 2.85em;
 			font-weight: 700;
+			font-family: 'Indie Flower', cursive;
 		}
 
 /* Footer */
@@ -1092,8 +1101,31 @@
 				z-index: 1;
 			}
 
-				#viewer .slide .caption h2, #viewer .slide .caption h3, #viewer .slide .caption h4, #viewer .slide .caption h5, #viewer .slide .caption h6 {
+				#viewer .slide .caption h2
+				{
 					color: #fff;
+					font-family: 'Indie Flower', cursive;
+				} 
+				#viewer .slide .caption h3
+				{
+					color: #fff;
+					font-family: 'Indie Flower', cursive;
+					font-size: 2.0em;
+				} 
+				#viewer .slide .caption h4
+				{
+					color: #fff;
+					font-family: 'Indie Flower', cursive;
+					font-size: 1.50em;
+				}
+				#viewer .slide .caption h5
+				{
+					color: #fff;
+					font-family: 'Indie Flower', cursive;
+				}
+				#viewer .slide .caption h6 {
+					color: #fff;
+					font-family: 'Indie Flower', cursive;
 				}
 
 			#viewer .slide .image {
